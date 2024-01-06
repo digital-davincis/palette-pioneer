@@ -61,7 +61,7 @@ async function getRandomPalette() {
     }
   
     const result = await response.json();
-    console.log(result)
+    //console.log(result)
     return result.result.map(color => rgbToHex(...color));
 }
 
