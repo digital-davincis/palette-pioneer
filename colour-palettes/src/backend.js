@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const sharp = require('sharp');
 
 // Takes a string input and returns a list of 2 palettes. Output format: [[1,1,1,1,1], [2,2,2,2,2]] where 1 and 2 represent hex formatted colors from palette 1 and palette 2.
+// Can be changed to return 1 palette by tweaking extractDominantColors().
 function getPaletteFromText(input) {
     query({ "inputs": "Color Palette - " + input })
         .then(extractDominantColors)
@@ -11,8 +12,10 @@ function getPaletteFromText(input) {
         .catch(console.error);
 }
 
-
-//Takes RGB color as input and returns a hex palette. Output format: [0,1,2,3,4]
+// Takes RGB color as input and returns a hex palette. Input format: [[x,y,z], "N", "N", "N", "N"] Output format: [0,1,2,3,4]
+//Can be used in 1 of 2 cases:
+// Case 1: User selects a single color to generate a palette from. Input format (RGB): [[x,y,z], "N", "N", "N", "N"] Output format (Hex): [0,1,2,3,4]
+// Case 2: User locks in multiple colors to regenerate a palette. Input format (RGB): [[x,y,z], [x,y,z], [x,y,z], "N", "N"] Output format (Hex): [0,1,2,3,4]
 async function getPaletteFromColor(input) {
     const url = 'http://colormind.io/api/';
     const data = {
@@ -33,6 +36,7 @@ async function getPaletteFromColor(input) {
     }
   
     const result = await response.json();
+    //console.log(result)
     return result.result.map(color => rgbToHex(...color));
 }
   
@@ -57,6 +61,7 @@ async function getRandomPalette() {
     }
   
     const result = await response.json();
+    console.log(result)
     return result.result.map(color => rgbToHex(...color));
 }
 
