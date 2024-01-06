@@ -12,92 +12,42 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function Landing() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square style={{backgroundColor: '#faf9f7'}}>
           <Box
             sx={{
-              my: 8,
+              my: 18,
               mx: 6,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <Typography component="h1" variant="h1" className=''>
-              Palette Pioneer
+            <Typography component="h1" variant="h1" style={{ color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 500 }} >
+                Palette Pioneer
             </Typography>
-            {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <Button
+            <Typography component="h6" variant="h6" align="center" style={{ color: "#00232e", fontFamily: 'sans-serif' }} sx={{my:5, mx:10,}}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla sapien ante, ut volutpat elit 
+            interdum in. Phasellus quis nisl sed metus efficitur faucibus sit amet nec leo. Praesent eu odio at lacus 
+            placerat consequat. Suspendisse id tellus tincidunt, vulputate neque eget, fermentum lorem. Vivamus porta 
+            dictum nisi, quis finibus metus. Maecenas aliquam auctor enim maximus sagittis.
+            </Typography>
+            <Button
                 type="submit"
-                fullWidth
+                style={{color:'white', backgroundColor:'#781e67', maxWidth: '300px', maxHeight: '100px', minWidth: '200px', minHeight: '50px'}}
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Let's Get Started!
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box> */}
           </Box>
         </Grid>
         <Grid
@@ -106,7 +56,7 @@ export default function Landing() {
           sm={4}
           md={5}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
