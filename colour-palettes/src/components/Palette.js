@@ -16,6 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Palette() {
 
   return (
+    <section id='palette'>
     <ThemeProvider theme={defaultTheme}>
     <Grid container component="main" sx={{ height: '100vh' }} style={{backgroundColor: '#faf9f7'}}>
         <CssBaseline />
@@ -95,5 +96,6 @@ export default function Palette() {
         </Grid>
     </Grid>
     </ThemeProvider>
+    </section>
   );
 }
