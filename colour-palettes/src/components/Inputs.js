@@ -133,6 +133,7 @@ export default function Inputs({ onChangePalette }) {
     const hexVal = document.getElementById('hexVal').value;
     if (hexVal) {
       const rgbArray = hexToRgb(hexVal);
+      handleClose();
       hexPalette([rgbArray]); // Assuming hexPalette expects an array
     }
   };
