@@ -3,6 +3,7 @@ import { Box, Typography, Button, Stack, Paper, Grid, CssBaseline, Snackbar } fr
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-scroll'
+import { useState, useEffect } from 'react';
 import lockedImg from '../locked.svg';
 import unlockedImg from '../unlocked.svg';
 
@@ -92,7 +93,7 @@ const Item = styled(Paper)(({ theme }) => ({
             >
                 {palette.map((item, index) => (
                     // TODO: add color changing lock
-                    <Item sx={{height: "20%", border: 0, borderRadius: 0}}>
+                    <Item key={index} sx={{height: "20%", border: 0, borderRadius: 0}}>
                         <Button 
                         variant="contained"
                         style={{backgroundColor: item["color"], height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}
@@ -120,71 +121,65 @@ const Item = styled(Paper)(({ theme }) => ({
             </Stack>
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper} 
-          square
-          style={{backgroundColor: '#faf9f7'}}
-        >
-            <Box
-            sx={{
-                mx: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-            >
-                <Box
-                    sx={{
-                    mt: "40%",
-                    mx: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    }}
-                >
-
-                <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ mt:2, mb: 2 }}
-                    style = {{backgroundColor: "#781e67", padding:'20px'}}
-                >
-                    REGENERATE WITH LOCKED COLORS
-                </Button>
-                </Box>
-
-                <Box
-                    sx={{
-                    mb: "40%",
-                    mx: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    }}
-                >
-                <Link
-                to="inputs" 
-                spy={true} 
-                smooth={true} 
-                duration={500}>
-                 <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ mt: 2, mb: 2 }}
-                    style = {{backgroundColor: "#781e67", padding:'20px'}}
+                    <Grid
+                        item
+                        xs={12}
+                        sm={8}
+                        md={5}
+                        component={Paper} 
+                        square
+                        style={{ backgroundColor: '#faf9f7' }}
                     >
-                    GENERATE NEW PALETTE
-                </Button>
-            </Link>
-            </Box>
-          </Box>
-        </Grid>
-    </Grid>
-    </ThemeProvider>
-    </section>
-  );
+                        <Box
+                            sx={{
+                                mx: 2,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    mt: "40%",
+                                    mx: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ mt: 2, mb: 2 }}
+                                    style={{ backgroundColor: "#781e67", padding: '20px' }}
+                                >
+                                    REGENERATE WITH LOCKED COLORS
+                                </Button>
+                            </Box>
+
+                            <Box
+                                sx={{
+                                    mb: "40%",
+                                    mx: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Link to="inputs" spy={true} smooth={true} duration={500}>
+                                    <Button
+                                        variant="contained"
+                                        sx={{ mt: 2, mb: 2 }}
+                                        style={{ backgroundColor: "#781e67", padding: '20px' }}
+                                    >
+                                        GENERATE NEW PALETTE
+                                    </Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </ThemeProvider>
+        </section>
+    );
 }
