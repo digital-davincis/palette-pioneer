@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Typography, Button, Stack, Paper, Grid, CssBaseline } from '@mui/material';
+import { Box, Typography, Button, Stack, Paper, Grid, CssBaseline, Snackbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-scroll'
@@ -16,6 +16,10 @@ const defaultPalette = [
         "locked": false
     },
     {
+        "color": "#CCCCCC",
+        "locked": false
+    },
+    {
         "color": "#A9A9A9",
         "locked": false
     },
@@ -25,10 +29,6 @@ const defaultPalette = [
     },
     {
         "color": "#686868",
-        "locked": false
-    },
-    {
-        "color": "#000000",
         "locked": false
     }
 ];
@@ -58,6 +58,25 @@ const Item = styled(Paper)(({ theme }) => ({
         }
     };
 
+    const copyColor = (index) => {
+        navigator.clipboard.writeText(palette[index]["color"]);
+        setSelectedColorMsg(true);
+
+    };
+
+    // Below functions are for snackbar (toast) messages
+    const [selectedColorMsg, setSelectedColorMsg] = React.useState(false);
+    const handleClick = () => {
+        setSelectedColorMsg(true);
+    };
+    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSelectedColorMsg(false);
+    };
+
   return (
     <section id='palette'>
     <ThemeProvider theme={defaultTheme}>
@@ -70,14 +89,14 @@ const Item = styled(Paper)(({ theme }) => ({
                 alignItems="stretch"
                 spacing={0}
                 sx={{height:"100%", border: 0, borderColor: "red"}}
-                // item: { display: "flex", flexDirection: "column" }
             >
                 {palette.map((item, index) => (
-                    
+                    // TODO: add color changing lock
                     <Item sx={{height: "20%", border: 0, borderRadius: 0}}>
                         <Button 
                         variant="contained"
-                        style={{backgroundColor: item["color"], height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        style={{backgroundColor: item["color"], height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}
+                        onClick={copyColor.bind(this, index)}>
                             <p style={{mixBlendMode: 'difference'}}>{item["color"]}</p>
                             
                             <div onClick={toggleLock.bind(this, index)} style={{maxWidth: '50px', margin: '10px 10px 10px 10px', cursor: 'pointer'}}>
@@ -87,6 +106,13 @@ const Item = styled(Paper)(({ theme }) => ({
                                     : <img id={String(index)} src={unlockedImg}></img>
                             }
                             </div>
+                            <Snackbar
+                                open={selectedColorMsg}
+                                autoHideDuration={3000}
+                                onClose={handleClose}
+                                message="Copied selected color"
+                                //action={action}
+                            />
                         </Button>
                     </Item>
 
