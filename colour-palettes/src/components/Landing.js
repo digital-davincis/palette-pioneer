@@ -1,11 +1,6 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -34,7 +29,7 @@ export default function Landing() {
             <Typography component="h1" variant="h1" style={{ color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 500 }} >
                 Palette Pioneer
             </Typography>
-            <Typography component="h6" variant="h6" align="center" style={{ color: "#00232e", fontFamily: 'sans-serif' }} sx={{my:5, mx:10,}}>
+            <Typography component="h6" variant="h6" align="center" style={{ color: "#4f0128", fontFamily: 'sans-serif' }} sx={{my:5, mx:10,}}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla sapien ante, ut volutpat elit 
             interdum in. Phasellus quis nisl sed metus efficitur faucibus sit amet nec leo. Praesent eu odio at lacus 
             placerat consequat. Suspendisse id tellus tincidunt, vulputate neque eget, fermentum lorem. Vivamus porta 
