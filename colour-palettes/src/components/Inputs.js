@@ -25,6 +25,13 @@ import Palette from './Palette';
 const defaultTheme = createTheme();
 
 export default function Inputs({ onChangePalette }) {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const [color, setColor] = useState('#000000');
 
@@ -54,6 +61,7 @@ export default function Inputs({ onChangePalette }) {
         });
         if (response.ok) {
           const newPalette = await response.json();
+          handleClose();
           onChangePalette(newPalette);
         } else {
           console.error('Server responded with an error');
@@ -69,6 +77,7 @@ export default function Inputs({ onChangePalette }) {
       const response = await fetch('http://localhost:3001/random-palette');
       if (response.ok) {
         const newPalette = await response.json();
+        handleClose();
         onChangePalette(newPalette);
       } else {
         console.error('Server responded with an error');
@@ -259,9 +268,6 @@ export default function Inputs({ onChangePalette }) {
               <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
-                onClick={() => {
-                  handleClose();
-                }}
               >
                 <CircularProgress color="inherit" />
               </Backdrop>
