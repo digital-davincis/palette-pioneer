@@ -12,27 +12,14 @@ const defaultTheme = createTheme();
 // Default palette is what the user sees on first launch,
 // and before they generate a palette. Default is grayscale.
 const defaultPalette = [
-    {
-        "color": "#FFFFFF",
-        "locked": false
-    },
-    {
-        "color": "#CCCCCC",
-        "locked": false
-    },
-    {
-        "color": "#A9A9A9",
-        "locked": false
-    },
-    {
-        "color": "#909090",
-        "locked": false
-    },
-    {
-        "color": "#686868",
-        "locked": false
-    }
+    "#FFFFFF",
+    "#CCCCCC",
+    "#A9A9A9",
+    "#909090",
+    "#686868"
 ];
+
+const lockedColors = [false, false, false, false, false];
 
 let palette = defaultPalette;
 
@@ -46,21 +33,25 @@ const Item = styled(Paper)(({ theme }) => ({
 
   
   export default function Palette() {
+
+    const [selectedLock, setSelectedLock] = React.useState(false);
       
     const toggleLock = (index) => {
-        console.log("clicked lock", index, palette[index]["locked"]);
-        palette[index]["locked"] = !palette[index]["locked"];
-        if (palette[index]["locked"]) {
+        setSelectedLock(true);
+        console.log("clicked lock", index);
+        lockedColors[index] = !lockedColors[index];
+        if (palette[index]) {
             document.getElementById(index).src=lockedImg;
             console.log("lock", index)
         } else {
             document.getElementById(index).src=unlockedImg;
             console.log("unlock", index)
         }
+        setSelectedLock(false);
     };
 
     const copyColor = (index) => {
-        navigator.clipboard.writeText(palette[index]["color"]);
+        navigator.clipboard.writeText(palette[index]);
         setSelectedColorMsg(true);
 
     };
@@ -96,13 +87,13 @@ const Item = styled(Paper)(({ theme }) => ({
                     <Item key={index} sx={{height: "20%", border: 0, borderRadius: 0}}>
                         <Button 
                         variant="contained"
-                        style={{backgroundColor: item["color"], height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}
+                        style={{backgroundColor: item, height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}
                         onClick={copyColor.bind(this, index)}>
-                            <p style={{mixBlendMode: 'difference'}}>{item["color"]}</p>
+                            <p style={{mixBlendMode: 'difference'}}>{item}</p>
                             
                             <div onClick={toggleLock.bind(this, index)} style={{maxWidth: '50px', margin: '10px 10px 10px 10px', cursor: 'pointer'}}>
                             {
-                                item["locked"] ?
+                                lockedColors[index] ?
                                     <img id={String(index)} src={lockedImg}></img> 
                                     : <img id={String(index)} src={unlockedImg}></img>
                             }
