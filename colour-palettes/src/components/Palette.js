@@ -10,7 +10,7 @@ const defaultTheme = createTheme();
 // and before they generate a palette. Default is grayscale.
 const defaultPalette = ["#FFFFFF", 
                         "#A9A9A9", 
-                        "#808080", 
+                        "#909090", 
                         "#686868", 
                         "#000000"];
 
