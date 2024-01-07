@@ -13,17 +13,25 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
 import ColorPicker from 'material-ui-color-picker'
-
+import { useState } from 'react';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function Inputs() {
+
+  const [color, setColor] = useState('#000000');
+
+  const handleColorChange = (newColor) => {
+    setColor(newColor);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      hexVal: data.get('hexVal'),
       email: data.get('email'),
       password: data.get('password'),
     });
@@ -59,6 +67,7 @@ export default function Inputs() {
                 autoComplete="phrase"
                 autoFocus
                 color="secondary"
+                style={{ width: '300px' }}
               />
               <Typography component="h10" variant="h10" className='' sx={{display:"flex", flexDirection:"row", justifyContent:"center"}} style={{color: "#4f0128"}}>
                   or
@@ -69,17 +78,46 @@ export default function Inputs() {
                 fullWidth
                 name="hexVal"
                 label="Enter a Hex Value"
-                type="hexVal"
+                type="text" // Changed type to text as hexVal is not a valid HTML input type
                 id="hexVal"
+                value={color} // Controlled component
+                onChange={(e) => handleColorChange(e.target.value)}
                 color="secondary"
-                
               />
-              <ColorPicker
+              
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style = {{backgroundColor: "#781e67", padding:'20px'}}
+              >
+                <ColorPicker
+                  name='color'
+                  defaultValue='Pick A Colour'
+                  value={color} // Controlled component
+                  onChange={color => handleColorChange(color)}
+                  
+                />
+              </Button>
+
+              {/* <Typography component="h6" variant="h6" style={{ margin: '20px 0', color: '#4f0128' }}>
+                Choose a Color
+              </Typography>
+              {/* <div style={{ width: '300px', height: '200px' }}>
+                <ColorPicker
+                  name='color'
+                  defaultValue='#000'
+                  onChange={color => console.log(color)}
+                />
+              </div> */}
+              {/* <ColorPicker
                 name='color'
                 defaultValue='#000'
+                // style={{ width: '300px'}}
+                style={{ width: '100%' }}
                 // value={this.state.color} - for controlled component
                 onChange={color => console.log(color)}
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
