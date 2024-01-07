@@ -87,6 +87,48 @@ export default function Inputs({ onChangePalette }) {
     }
   };
 
+  // const handleHexSubmit = () => {
+  //   const hexVal = document.getElementById('hexVal').value;
+  //   if (hexVal && /^#[0-9A-F]{6}$/i.test(hexVal)) { // Validate hex format
+  //     const rgbArray = hexToRgb(hexVal);
+  //     if(rgbArray) {
+  //       hexPalette(rgbArray, onChangePalette); // Pass the onChangePalette function
+  //     } else {
+  //       console.error('Invalid hex value:', hexVal);
+  //     }
+  //   } else {
+  //     console.error('Provided value is not a valid hex color:', hexVal);
+  //   }
+  // };
+
+  // const handleHexSubmit = async () => {
+  //   const hexVal = document.getElementById('hexVal').value;
+  //   if (hexVal) {
+  //     const rgbArray = hexToRgb(hexVal);
+  //     if (rgbArray) {
+  //       try {
+  //         const response = await fetch('http://localhost:3001/hex-palette', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify({ RGB_array: rgbArray })
+  //         });
+  //         if (response.ok) {
+  //           const newPalette = await response.json();
+  //           onChangePalette(newPalette);
+  //         } else {
+  //           console.error('Server responded with an error');
+  //         }
+  //       } catch (error) {
+  //         console.error('Error:', error);
+  //       }
+  //     } else {
+  //       console.error('Invalid hex value');
+  //     }
+  //   }
+  // };
+
   const handleHexSubmit = () => {
     const hexVal = document.getElementById('hexVal').value;
     if (hexVal) {
@@ -94,19 +136,7 @@ export default function Inputs({ onChangePalette }) {
       hexPalette([rgbArray]); // Assuming hexPalette expects an array
     }
   };
-  
-  function hexPalette(RGB_array) {
-    fetch('http://localhost:3001/hex-palette', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ RGB_array }), // Send RGB_array in the request body
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
-  }
+
 
   return (
     <section id="inputs">
@@ -281,6 +311,18 @@ export default function Inputs({ onChangePalette }) {
   );
 };
 
+function hexPalette(RGB_array) {
+  fetch('http://localhost:3001/hex-palette', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ RGB_array }), // Send RGB_array in the request body
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
 
 // Reference comments in backend.js for input and output formats.
 
