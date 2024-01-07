@@ -14,14 +14,24 @@ import { color } from '@mui/system';
 import ColorPicker from 'material-ui-color-picker'
 import { useState } from 'react';
 import { Link } from 'react-scroll'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Palette from './Palette';
 //import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
+
 const defaultTheme = createTheme();
 
 export default function Inputs({ onChangePalette }) {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const [color, setColor] = useState('#000000');
 
@@ -38,7 +48,6 @@ export default function Inputs({ onChangePalette }) {
       password: data.get('password'),
     });
   };
-
   const handlePhraseSubmit = async () => {
     const phrase = document.getElementById('phrase').value;
     if (phrase) {
@@ -52,6 +61,7 @@ export default function Inputs({ onChangePalette }) {
         });
         if (response.ok) {
           const newPalette = await response.json();
+          handleClose();
           onChangePalette(newPalette);
         } else {
           console.error('Server responded with an error');
@@ -67,6 +77,7 @@ export default function Inputs({ onChangePalette }) {
       const response = await fetch('http://localhost:3001/random-palette');
       if (response.ok) {
         const newPalette = await response.json();
+        handleClose();
         onChangePalette(newPalette);
       } else {
         console.error('Server responded with an error');
@@ -152,7 +163,10 @@ export default function Inputs({ onChangePalette }) {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
-                    onClick={handlePhraseSubmit}
+                    onClick={() => {
+                      handlePhraseSubmit();
+                      handleOpen();
+                    }}
                 >
                     Generate From Phrase
                 </Button>
@@ -202,7 +216,10 @@ export default function Inputs({ onChangePalette }) {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
-                    onClick={handleHexSubmit}
+                    onClick={() => {
+                      handleHexSubmit();
+                      handleOpen();
+                    }}
                 >
                     Generate From Hex
                 </Button>
@@ -254,10 +271,19 @@ export default function Inputs({ onChangePalette }) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style = {{backgroundColor: "#781e67", padding:'20px'}}
-                onClick={randomPalette}
+                onClick={() => {
+                  randomPalette();
+                  handleOpen();
+                }}
               >
                 GENERATE RANDOM PALETTE
               </Button>
+              <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
             </Link>
             </Box>
           </Box>
