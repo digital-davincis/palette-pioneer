@@ -45,7 +45,7 @@ export default function Inputs() {
           
           <Box
             sx={{
-              my: 30,
+              my: 16,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
@@ -56,19 +56,24 @@ export default function Inputs() {
                 Manually Create a Palette
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <TextField
-                sx={{color: "#04baf7"}}
+            <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="phrase"
-                label="What Vibe are you looking for?"
                 name="phrase"
-                autoComplete="phrase"
-                autoFocus
+                label="What vibe are you going for?"
+                id="phrase"
                 color="secondary"
-                style={{ width: '300px' }}
-              />
+              ></TextField>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style = {{backgroundColor: "#781e67"}}
+              >
+                Generate Based on Phrase
+              </Button>
               <Typography component="h10" variant="h10" className='' sx={{display:"flex", flexDirection:"row", justifyContent:"center"}} style={{color: "#4f0128"}}>
                   or
               </Typography>
@@ -83,41 +88,25 @@ export default function Inputs() {
                 value={color} // Controlled component
                 onChange={(e) => handleColorChange(e.target.value)}
                 color="secondary"
-              />
+              ></TextField>
               
               <Button
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                style = {{backgroundColor: "#781e67", padding:'20px'}}
+                style = {{backgroundColor: "white", padding:'8px'}}
               >
                 <ColorPicker
                   name='color'
-                  defaultValue='Pick A Colour'
+                  required
+                  fullWidth
+                  defaultValue='Pick a Colour'
                   value={color} // Controlled component
                   onChange={color => handleColorChange(color)}
-                  
                 />
               </Button>
 
-              {/* <Typography component="h6" variant="h6" style={{ margin: '20px 0', color: '#4f0128' }}>
-                Choose a Color
-              </Typography>
-              {/* <div style={{ width: '300px', height: '200px' }}>
-                <ColorPicker
-                  name='color'
-                  defaultValue='#000'
-                  onChange={color => console.log(color)}
-                />
-              </div> */}
-              {/* <ColorPicker
-                name='color'
-                defaultValue='#000'
-                // style={{ width: '300px'}}
-                style={{ width: '100%' }}
-                // value={this.state.color} - for controlled component
-                onChange={color => console.log(color)}
-              /> */}
+              
               <Button
                 type="submit"
                 fullWidth
@@ -125,7 +114,7 @@ export default function Inputs() {
                 sx={{ mt: 3, mb: 2 }}
                 style = {{backgroundColor: "#781e67"}}
               >
-                GENERATE
+                Generate Based on Hex
               </Button>
               
             </Box>
