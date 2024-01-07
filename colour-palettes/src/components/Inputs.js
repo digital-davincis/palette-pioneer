@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
 import { Link } from 'react-scroll'
+import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -144,4 +145,20 @@ export default function Inputs() {
     </ThemeProvider>
     </section>
   );
-}
+};
+
+
+// Reference comments in backend.js for input and output formats.
+
+function randomPalette() {
+  console.log(getRandomPalette());
+};
+
+
+function hexPalette(RGB_array) {
+  console.log(getPaletteFromColor(RGB_array));
+};
+
+function textPalette(string){
+  console.log(getPaletteFromText(string));
+};
