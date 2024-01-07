@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const { getRandomPalette } = require('../src/backend.js');
+const { getRandomPalette, getPaletteFromColor, getPaletteFromText } = require('../src/backend.js');
 
 const app = express();
+app.use(express.json())
 const port = 3001; // Can be any port that's free on your system
 
 app.use(cors()); // Use CORS to allow cross-origin requests
@@ -25,6 +26,7 @@ app.post('/hex-palette', async (req, res) => {
     try {
       const input = req.body.RGB_array; // Ensure the client sends RGB_array
       const palette = await getPaletteFromColor(input);
+      console.log(palette);
       res.json(palette);
     } catch (error) {
       console.error(error);
@@ -37,6 +39,8 @@ app.post('/hex-palette', async (req, res) => {
     try {
       const input = req.body.string; // Ensure the client sends string
       const palette = await getPaletteFromText(input);
+      // console.log("input: ", input)
+      // console.log("Palette to send: ", palette)
       res.json(palette);
     } catch (error) {
       console.error(error);
