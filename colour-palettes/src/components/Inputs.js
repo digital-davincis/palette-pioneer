@@ -62,14 +62,6 @@ export default function Inputs({ onChangePalette }) {
     }
   };
 
-  const handleHexSubmit = () => {
-    const hexVal = document.getElementById('hexVal').value;
-    if (hexVal) {
-      const rgbArray = hexToRgb(hexVal);
-      hexPalette([rgbArray]); // Assuming hexPalette expects an array
-    }
-  };
-
   const randomPalette = async () => {
     try {
       const response = await fetch('http://localhost:3001/random-palette');
@@ -84,6 +76,14 @@ export default function Inputs({ onChangePalette }) {
     }
   };
 
+  const handleHexSubmit = () => {
+    const hexVal = document.getElementById('hexVal').value;
+    if (hexVal) {
+      const rgbArray = hexToRgb(hexVal);
+      hexPalette([rgbArray]); // Assuming hexPalette expects an array
+    }
+  };
+  
   function hexPalette(RGB_array) {
     fetch('http://localhost:3001/hex-palette', {
       method: 'POST',
