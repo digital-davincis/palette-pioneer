@@ -3,13 +3,15 @@ const sharp = require('sharp');
 
 // Takes a string input and returns a list of 2 palettes. Output format: [[1,1,1,1,1], [2,2,2,2,2]] where 1 and 2 represent hex formatted colors from palette 1 and palette 2.
 // Can be changed to return 1 palette by tweaking extractDominantColors().
-function getPaletteFromText(input) {
-    query({ "inputs": "Color Palette - " + input })
-        .then(extractDominantColors)
-        .then(colors => {
-            return colors; 
-        })
-        .catch(console.error);
+async function getPaletteFromText(input) {
+  try {
+      const buffer = await query({ "inputs": "Color Palette - " + input });
+      const colors = await extractDominantColors(buffer);
+      return colors; 
+  } catch (error) {
+      console.error(error);
+      return null;
+  }
 }
 
 // Takes RGB color as input and returns a hex palette. Input format: [[x,y,z], "N", "N", "N", "N"] Output format: [0,1,2,3,4]
@@ -125,3 +127,9 @@ function rgbToHex(r, g, b) {
         return hex.length === 1 ? "0" + hex : hex;
     }).join("");
 }
+
+module.exports = {
+  getPaletteFromText,
+  getPaletteFromColor,
+  getRandomPalette
+};

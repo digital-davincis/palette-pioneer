@@ -16,7 +16,7 @@ export default function Landing() {
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square style={{backgroundColor: '#faf9f7'}}>
+        <Grid item xs={12} sm={8} md={7} component={Paper} elevation={0} square style={{backgroundColor: '#faf9f7'}} grid= 'none'>
           <Box
             sx={{
               my: 18,
@@ -31,10 +31,9 @@ export default function Landing() {
                 Palette Pioneer
             </Typography>
             <Typography component="h6" variant="h6" align="center" style={{ color: "#4f0128", fontFamily: 'sans-serif' }} sx={{my:5, mx:10,}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla sapien ante, ut volutpat elit 
-            interdum in. Phasellus quis nisl sed metus efficitur faucibus sit amet nec leo. Praesent eu odio at lacus 
-            placerat consequat. Suspendisse id tellus tincidunt, vulputate neque eget, fermentum lorem. Vivamus porta 
-            dictum nisi, quis finibus metus. Maecenas aliquam auctor enim maximus sagittis.
+            Palette Pioneer isn't just a color palette website; it's the easiest way to bring your ideas to life 
+            with the perfect color scheme. Simply input a phrase, a hex code or even leave the thinking up to us and watch as Palette Pioneer transforms 
+            your thoughts into a stunning color palette tailored just for you!
             </Typography>
 
             <Link
