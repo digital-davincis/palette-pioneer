@@ -5,6 +5,16 @@ import { styled } from '@mui/material/styles';
 
 const defaultTheme = createTheme();
 
+// Default palette is what the user sees on first launch,
+// and before they generate a palette. Default is grayscale.
+const defaultPalette = ["#D3D3D3", 
+                        "#A9A9A9", 
+                        "#808080", 
+                        "#686868", 
+                        "#000000"];
+
+const palette = defaultPalette;
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -28,10 +38,17 @@ export default function Palette() {
                 spacing={0}
                 sx={{height:"100%", border: 0, borderColor: "red"}}
                 // item: { display: "flex", flexDirection: "column" }
+                
             >
-                {[1, 2, 3, 4, 5].map((value) => (
+                {palette.map((value) => (
                     
-                    <Item sx={{height: "20%", border: 0}}>Item {value}</Item>
+                    <Item sx={{height: "20%", border: 0, borderRadius: 0}}>
+                        <Button 
+                        variant="contained"
+                        style={{backgroundColor: value, height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <p style={{mixBlendMode: 'hard-light'}}>{value}</p>
+                        </Button>
+                    </Item>
 
                 ))}
             </Stack>
