@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link } from 'react-scroll'
 
 const defaultTheme = createTheme();
 
@@ -35,14 +36,22 @@ export default function Landing() {
             placerat consequat. Suspendisse id tellus tincidunt, vulputate neque eget, fermentum lorem. Vivamus porta 
             dictum nisi, quis finibus metus. Maecenas aliquam auctor enim maximus sagittis.
             </Typography>
-            <Button
-                type="submit"
-                style={{color:'white', backgroundColor:'#781e67', maxWidth: '300px', maxHeight: '100px', minWidth: '200px', minHeight: '50px'}}
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Let's Get Started!
-              </Button>
+
+            <Link
+            to="inputs" 
+            spy={true} 
+            smooth={true} 
+            duration={500}>
+              <Button
+                  type="submit"
+                  style={{color:'white', backgroundColor:'#781e67', maxWidth: '300px', maxHeight: '100px', minWidth: '200px', minHeight: '50px'}}
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Let's Get Started!
+                </Button>
+            </Link>
+            
           </Box>
         </Grid>
         <Grid
