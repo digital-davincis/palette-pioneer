@@ -115,7 +115,8 @@ async function extractDominantColors(buffer) {
     const palette2 = [colors[1], colors[3], colors[5], colors[7], colors[9]];
     const twoPalettes = [palette1, palette2];
 
-    return twoPalettes;
+    //return twoPalettes;
+    return palette1;
 
     
 }
