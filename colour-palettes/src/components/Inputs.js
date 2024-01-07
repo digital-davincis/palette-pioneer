@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
 import ColorPicker from 'material-ui-color-picker'
+import { useState } from 'react';
 import { Link } from 'react-scroll'
 //import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
@@ -20,10 +21,18 @@ import { Link } from 'react-scroll'
 const defaultTheme = createTheme();
 
 export default function Inputs() {
+
+  const [color, setColor] = useState('#000000');
+
+  const handleColorChange = (newColor) => {
+    setColor(newColor);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      hexVal: data.get('hexVal'),
       email: data.get('email'),
       password: data.get('password'),
     });
@@ -38,7 +47,7 @@ export default function Inputs() {
           
           <Box
             sx={{
-              my: 20,
+              my: 16,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
@@ -49,17 +58,14 @@ export default function Inputs() {
             <Typography component="h4" variant="h4" style={{color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 'bold'}}>
                 Manually Create a Palette
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }} resize="none">
-              <TextField
-                sx={{color: "#04baf7"}}
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="phrase"
-                label="What Vibe are you looking for?"
                 name="phrase"
-                autoComplete="phrase"
-                autoFocus
+                label="What vibe are you going for?"
+                id="phrase"
                 color="secondary"
               />
               <Link
@@ -88,20 +94,30 @@ export default function Inputs() {
                 fullWidth
                 name="hexVal"
                 label="Enter a Hex Value"
-                type="hexVal"
+                type="text" // Changed type to text as hexVal is not a valid HTML input type
                 id="hexVal"
+                value={color} // Controlled component
+                onChange={(e) => handleColorChange(e.target.value)}
                 color="secondary"
-                
-              />
-              <ColorPicker
-                marigin="normal"
-                required
-                fullWidth
-                name='color'
-                defaultValue='#000'
-                // value={this.state.color} - for controlled component
-                onChange={color => console.log(color)}
-              />
+              ></TextField>
+              
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style = {{backgroundColor: "white", padding:'8px'}}
+              >
+                <ColorPicker
+                  name='color'
+                  required
+                  fullWidth
+                  defaultValue='Pick a Colour'
+                  value={color} // Controlled component
+                  onChange={color => handleColorChange(color)}
+                />
+              </Button>
+
+            
               <Link
                 to="palette" 
                 spy={true} 
