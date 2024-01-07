@@ -3,20 +3,22 @@ const sharp = require('sharp');
 
 // Takes a string input and returns a list of 2 palettes. Output format: [[1,1,1,1,1], [2,2,2,2,2]] where 1 and 2 represent hex formatted colors from palette 1 and palette 2.
 // Can be changed to return 1 palette by tweaking extractDominantColors().
-export function getPaletteFromText(input) {
-    query({ "inputs": "Color Palette - " + input })
-        .then(extractDominantColors)
-        .then(colors => {
-            return colors; 
-        })
-        .catch(console.error);
+async function getPaletteFromText(input) {
+  try {
+      const buffer = await query({ "inputs": "Color Palette - " + input });
+      const colors = await extractDominantColors(buffer);
+      return colors; 
+  } catch (error) {
+      console.error(error);
+      return null;
+  }
 }
 
 // Takes RGB color as input and returns a hex palette. Input format: [[x,y,z], "N", "N", "N", "N"] Output format: [0,1,2,3,4]
 //Can be used in 1 of 2 cases:
 // Case 1: User selects a single color to generate a palette from. Input format (RGB): [[x,y,z], "N", "N", "N", "N"] Output format (Hex): [0,1,2,3,4]
 // Case 2: User locks in multiple colors to regenerate a palette. Input format (RGB): [[x,y,z], [x,y,z], [x,y,z], "N", "N"] Output format (Hex): [0,1,2,3,4]
-export async function getPaletteFromColor(input) {
+async function getPaletteFromColor(input) {
     const url = 'http://colormind.io/api/';
     const data = {
       model: 'default',
@@ -42,7 +44,7 @@ export async function getPaletteFromColor(input) {
   
 
 //Takes no input and generates a random 5 color palette in hex. Output format: [0,1,2,3,4]
-export async function getRandomPalette() {
+async function getRandomPalette() {
     const url = 'http://colormind.io/api/';
     const data = {
       model: 'default',
@@ -125,3 +127,9 @@ function rgbToHex(r, g, b) {
         return hex.length === 1 ? "0" + hex : hex;
     }).join("");
 }
+
+module.exports = {
+  getPaletteFromText,
+  getPaletteFromColor,
+  getRandomPalette
+};
