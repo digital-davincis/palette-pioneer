@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
+import ColorPicker from 'material-ui-color-picker'
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -29,9 +31,9 @@ export default function Inputs() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }} style={{backgroundColor: '#faf9f7'}}>
+      <Grid container component="main" sx={{ height: '100vh'}} elevation={0}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={6} component={Paper} square>
+        <Grid item xs={12} sm={8} md={6} component={Paper} square style={{backgroundColor: '#faf9f7'}}>
           
           <Box
             sx={{
@@ -70,6 +72,13 @@ export default function Inputs() {
                 type="hexVal"
                 id="hexVal"
                 color="secondary"
+                
+              />
+              <ColorPicker
+                name='color'
+                defaultValue='#000'
+                // value={this.state.color} - for controlled component
+                onChange={color => console.log(color)}
               />
               <Button
                 type="submit"
@@ -93,6 +102,7 @@ export default function Inputs() {
           md={6}
           component={Paper} 
           square
+          style={{backgroundColor: '#faf9f7'}}
         >
            <Box
             sx={{
@@ -101,6 +111,7 @@ export default function Inputs() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              boxShadow:"none",
             }}
           >
             <Typography component="h4" variant="h4" style={{color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 'bold'}}>
@@ -113,7 +124,9 @@ export default function Inputs() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
+                  
                 }}
+               
               >
 
               <Button
