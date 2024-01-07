@@ -76,55 +76,38 @@ export default function Inputs({ onChangePalette }) {
     }
   };
 
-  // const handleHexSubmit = () => {
-  //   const hexVal = document.getElementById('hexVal').value;
-  //   if (hexVal && /^#[0-9A-F]{6}$/i.test(hexVal)) { // Validate hex format
-  //     const rgbArray = hexToRgb(hexVal);
-  //     if(rgbArray) {
-  //       hexPalette(rgbArray, onChangePalette); // Pass the onChangePalette function
-  //     } else {
-  //       console.error('Invalid hex value:', hexVal);
-  //     }
-  //   } else {
-  //     console.error('Provided value is not a valid hex color:', hexVal);
-  //   }
-  // };
+  const handleHexSubmit = async () => {
+    const hexVal = document.getElementById('hexVal').value;
+    if (hexVal) {
+      try {
+        const rgbArray = hexToRgb(hexVal);
+        const response = await fetch('http://localhost:3001/hex-palette', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ rgbArray })
+        });
+        if (response.ok) {
+          const newPalette = await response.json();
+          onChangePalette(newPalette);
+        } else {
+          console.error('Server responded with an error');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  }
+};
 
-  // const handleHexSubmit = async () => {
+
+  // const handleHexSubmit = () => {
   //   const hexVal = document.getElementById('hexVal').value;
   //   if (hexVal) {
   //     const rgbArray = hexToRgb(hexVal);
-  //     if (rgbArray) {
-  //       try {
-  //         const response = await fetch('http://localhost:3001/hex-palette', {
-  //           method: 'POST',
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify({ RGB_array: rgbArray })
-  //         });
-  //         if (response.ok) {
-  //           const newPalette = await response.json();
-  //           onChangePalette(newPalette);
-  //         } else {
-  //           console.error('Server responded with an error');
-  //         }
-  //       } catch (error) {
-  //         console.error('Error:', error);
-  //       }
-  //     } else {
-  //       console.error('Invalid hex value');
-  //     }
+  //     hexPalette([rgbArray]); // Assuming hexPalette expects an array
   //   }
   // };
-
-  const handleHexSubmit = () => {
-    const hexVal = document.getElementById('hexVal').value;
-    if (hexVal) {
-      const rgbArray = hexToRgb(hexVal);
-      hexPalette([rgbArray]); // Assuming hexPalette expects an array
-    }
-  };
 
 
   return (
