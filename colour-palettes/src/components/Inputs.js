@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
+import ColorPicker from 'material-ui-color-picker'
 import { Link } from 'react-scroll'
 //import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
@@ -31,23 +32,24 @@ export default function Inputs() {
   return (
     <section id="inputs">
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }} style={{backgroundColor: '#faf9f7'}}>
+      <Grid container component="main" sx={{ height: '100vh'}} elevation={0}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={6} component={Paper} square>
+        <Grid item xs={12} sm={8} md={6} component={Paper} square style={{backgroundColor: '#faf9f7'}}>
           
           <Box
             sx={{
-              my: 30,
+              my: 20,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
+            resize="none"
           >
             <Typography component="h4" variant="h4" style={{color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 'bold'}}>
                 Manually Create a Palette
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }} resize="none">
               <TextField
                 sx={{color: "#04baf7"}}
                 margin="normal"
@@ -58,19 +60,6 @@ export default function Inputs() {
                 name="phrase"
                 autoComplete="phrase"
                 autoFocus
-                color="secondary"
-              />
-              <Typography component="h10" variant="h10" className='' sx={{display:"flex", flexDirection:"row", justifyContent:"center"}} style={{color: "#4f0128"}}>
-                  or
-              </Typography>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="hexVal"
-                label="Enter a Hex Value"
-                type="hexVal"
-                id="hexVal"
                 color="secondary"
               />
               <Link
@@ -86,7 +75,46 @@ export default function Inputs() {
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
                 >
-                    GENERATE
+                    Generate From Phrase
+                </Button>
+            </Link>
+              <Typography component="h10" variant="h10" className='' sx={{display:"flex", flexDirection:"row", justifyContent:"center"}} style={{color: "#4f0128"}}>
+                  or
+              </Typography>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="hexVal"
+                label="Enter a Hex Value"
+                type="hexVal"
+                id="hexVal"
+                color="secondary"
+                
+              />
+              <ColorPicker
+                marigin="normal"
+                required
+                fullWidth
+                name='color'
+                defaultValue='#000'
+                // value={this.state.color} - for controlled component
+                onChange={color => console.log(color)}
+              />
+              <Link
+                to="palette" 
+                spy={true} 
+                smooth={true} 
+                duration={500}>
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    style = {{backgroundColor: "#781e67"}}
+                >
+                    Generate From Hex
                 </Button>
             </Link>
             </Box>
@@ -101,14 +129,16 @@ export default function Inputs() {
           md={6}
           component={Paper} 
           square
+          style={{backgroundColor: '#faf9f7'}}
         >
            <Box
             sx={{
-              my: 30,
+              my: 20,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              boxShadow:"none",
             }}
           >
             <Typography component="h4" variant="h4" style={{color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 'bold'}}>
