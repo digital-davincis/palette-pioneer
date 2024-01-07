@@ -16,7 +16,7 @@ export default function Landing() {
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square style={{backgroundColor: '#faf9f7'}}>
+        <Grid item xs={12} sm={8} md={7} component={Paper} elevation={0} square style={{backgroundColor: '#faf9f7'}} grid= 'none'>
           <Box
             sx={{
               my: 18,
