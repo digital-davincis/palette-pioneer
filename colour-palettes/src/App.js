@@ -11,9 +11,6 @@ export default function App() {
       <Landing />
       <Inputs />
       <Palette />
-      <p className="text-gray-400 bg-background_main text-center body-font -mt-10">
-        © 2024 HackED
-      </p>
     </main>
   );
 }
