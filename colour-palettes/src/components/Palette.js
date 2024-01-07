@@ -21,7 +21,7 @@ const defaultPalette = [
 
 const lockedColors = [false, false, false, false, false];
 
-let palette = defaultPalette;
+//let palette = defaultPalette;
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -32,7 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
   
-  export default function Palette() {
+  export default function Palette({palette}) {
 
     const [selectedLock, setSelectedLock] = React.useState(false);
       
@@ -82,14 +82,14 @@ const Item = styled(Paper)(({ theme }) => ({
                 spacing={0}
                 sx={{height:"100%", border: 0, borderColor: "red"}}
             >
-                {palette.map((item, index) => (
+                {palette.map((color, index) => (
                     // TODO: add color changing lock
                     <Item key={index} sx={{height: "20%", border: 0, borderRadius: 0}}>
                         <Button 
                         variant="contained"
-                        style={{backgroundColor: item, height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}
+                        style={{backgroundColor: color, height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}
                         onClick={copyColor.bind(this, index)}>
-                            <p style={{mixBlendMode: 'difference'}}>{item}</p>
+                            <p style={{mixBlendMode: 'difference'}}>{color}</p>
                             
                             <div onClick={toggleLock.bind(this, index)} style={{maxWidth: '50px', margin: '10px 10px 10px 10px', cursor: 'pointer'}}>
                             {
