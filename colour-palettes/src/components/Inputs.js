@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -14,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
 import ColorPicker from 'material-ui-color-picker'
 import { useState } from 'react';
+import { Link } from 'react-scroll'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -38,6 +38,7 @@ export default function Inputs() {
   };
 
   return (
+    <section id="inputs">
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh'}} elevation={0}>
         <CssBaseline />
@@ -51,6 +52,7 @@ export default function Inputs() {
               flexDirection: 'column',
               alignItems: 'center',
             }}
+            resize="none"
           >
             <Typography component="h4" variant="h4" style={{color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 'bold'}}>
                 Manually Create a Palette
@@ -64,16 +66,23 @@ export default function Inputs() {
                 label="What vibe are you going for?"
                 id="phrase"
                 color="secondary"
-              ></TextField>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                style = {{backgroundColor: "#781e67"}}
-              >
-                Generate Based on Phrase
-              </Button>
+              />
+              <Link
+                to="palette" 
+                spy={true} 
+                smooth={true} 
+                duration={500}>
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    style = {{backgroundColor: "#781e67"}}
+                >
+                    Generate From Phrase
+                </Button>
+            </Link>
               <Typography component="h10" variant="h10" className='' sx={{display:"flex", flexDirection:"row", justifyContent:"center"}} style={{color: "#4f0128"}}>
                   or
               </Typography>
@@ -106,17 +115,23 @@ export default function Inputs() {
                 />
               </Button>
 
-              
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                style = {{backgroundColor: "#781e67"}}
-              >
-                Generate Based on Hex
-              </Button>
-              
+            
+              <Link
+                to="palette" 
+                spy={true} 
+                smooth={true} 
+                duration={500}>
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    style = {{backgroundColor: "#781e67"}}
+                >
+                    Generate From Hex
+                </Button>
+            </Link>
             </Box>
           </Box>
           
@@ -133,7 +148,7 @@ export default function Inputs() {
         >
            <Box
             sx={{
-              my: 30,
+              my: 20,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
@@ -151,11 +166,14 @@ export default function Inputs() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  
                 }}
-               
               >
-
+            
+            <Link
+            to="palette" 
+            spy={true} 
+            smooth={true} 
+            duration={500}>
               <Button
                 type="submit"
                 variant="contained"
@@ -164,10 +182,12 @@ export default function Inputs() {
               >
                 GENERATE RANDOM PALETTE
               </Button>
+            </Link>
             </Box>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
+    </section>
   );
 }
