@@ -101,6 +101,7 @@ export default function Inputs({ onChangePalette }) {
         });
         if (response.ok) {
           const newPalette = await response.json();
+          handleClose();
           onChangePalette(newPalette);
         } else {
           console.error('Server responded with an error');
@@ -119,6 +120,15 @@ export default function Inputs({ onChangePalette }) {
   //     hexPalette([rgbArray]); // Assuming hexPalette expects an array
   //   }
   // };
+
+  //const handleHexSubmit = () => {
+  //  const hexVal = document.getElementById('hexVal').value;
+  //  if (hexVal) {
+  //    const rgbArray = hexToRgb(hexVal);
+  //    handleClose();
+  //    hexPalette([rgbArray]); // Assuming hexPalette expects an array
+  //  }
+  //};
 
 
   return (
