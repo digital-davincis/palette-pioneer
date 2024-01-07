@@ -7,7 +7,7 @@ const defaultTheme = createTheme();
 
 // Default palette is what the user sees on first launch,
 // and before they generate a palette. Default is grayscale.
-const defaultPalette = ["#D3D3D3", 
+const defaultPalette = ["#FFFFFF", 
                         "#A9A9A9", 
                         "#808080", 
                         "#686868", 
@@ -46,7 +46,7 @@ export default function Palette() {
                         <Button 
                         variant="contained"
                         style={{backgroundColor: value, height:"100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                            <p style={{mixBlendMode: 'hard-light'}}>{value}</p>
+                            <p style={{mixBlendMode: 'difference'}}>{value}</p>
                         </Button>
                     </Item>
 
