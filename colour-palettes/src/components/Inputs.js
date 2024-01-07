@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
 import { Link } from 'react-scroll'
-import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
+//import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -134,6 +134,7 @@ export default function Inputs() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style = {{backgroundColor: "#781e67", padding:'20px'}}
+                onClick={randomPalette}
               >
                 GENERATE RANDOM PALETTE
               </Button>
@@ -151,14 +152,40 @@ export default function Inputs() {
 // Reference comments in backend.js for input and output formats.
 
 function randomPalette() {
-  console.log(getRandomPalette());
-};
-
+  fetch('http://localhost:3001/random-palette')
+    .then(response => {
+      console.log(response); // Log the raw response
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
 
 function hexPalette(RGB_array) {
-  console.log(getPaletteFromColor(RGB_array));
-};
+  fetch('http://localhost:3001/hex-palette', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ RGB_array }), // Send RGB_array in the request body
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
 
-function textPalette(string){
-  console.log(getPaletteFromText(string));
-};
+function textPalette(string) {
+  fetch('http://localhost:3001/text-palette', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ string }), // Send string in the request body
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
