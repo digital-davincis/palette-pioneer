@@ -37,17 +37,18 @@ export default function Inputs() {
           
           <Box
             sx={{
-              my: 30,
+              my: 20,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
+            resize="none"
           >
             <Typography component="h4" variant="h4" style={{color: "#04baf7", fontFamily: 'sans-serif', fontWeight: 'bold'}}>
                 Manually Create a Palette
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }} resize="none">
               <TextField
                 sx={{color: "#04baf7"}}
                 margin="normal"
@@ -75,6 +76,9 @@ export default function Inputs() {
                 
               />
               <ColorPicker
+                marigin="normal"
+                required
+                fullWidth
                 name='color'
                 defaultValue='#000'
                 // value={this.state.color} - for controlled component
@@ -112,7 +116,7 @@ export default function Inputs() {
         >
            <Box
             sx={{
-              my: 30,
+              my: 20,
               mx: 2,
               display: 'flex',
               flexDirection: 'column',
@@ -130,9 +134,7 @@ export default function Inputs() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  
                 }}
-               
               >
             
             <Link

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Typography, Button, Stack, Paper, Grid, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
+import { Link } from 'react-scroll'
 
 const defaultTheme = createTheme();
 
@@ -18,9 +19,9 @@ export default function Palette() {
   return (
     <section id='palette'>
     <ThemeProvider theme={defaultTheme}>
-    <Grid container component="main" sx={{ height: '100vh' }} style={{backgroundColor: '#faf9f7'}}>
+    <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={7} component={Paper} square style={{backgroundColor: '#faf9f7'}}>
+        <Grid item xs={12} sm={8} md={7} component={Paper} square>
             <Stack
                 direction="column"
                 justifyContent="flex-start"
@@ -44,6 +45,7 @@ export default function Palette() {
           md={5}
           component={Paper} 
           square
+          style={{backgroundColor: '#faf9f7'}}
         >
             <Box
             sx={{
@@ -82,15 +84,20 @@ export default function Palette() {
                     alignItems: 'center',
                     }}
                 >
-
-                <Button
+                <Link
+                to="inputs" 
+                spy={true} 
+                smooth={true} 
+                duration={500}>
+                 <Button
                     type="submit"
                     variant="contained"
                     sx={{ mt: 2, mb: 2 }}
                     style = {{backgroundColor: "#781e67", padding:'20px'}}
-                >
-                GENERATE NEW PALETTE
-              </Button>
+                    >
+                    GENERATE NEW PALETTE
+                </Button>
+            </Link>
             </Box>
           </Box>
         </Grid>
