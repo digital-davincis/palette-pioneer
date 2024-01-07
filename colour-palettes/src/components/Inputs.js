@@ -61,6 +61,22 @@ export default function Inputs() {
                 autoFocus
                 color="secondary"
               />
+              <Link
+                to="palette" 
+                spy={true} 
+                smooth={true} 
+                duration={500}>
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    style = {{backgroundColor: "#781e67"}}
+                >
+                    Generate From Phrase
+                </Button>
+            </Link>
               <Typography component="h10" variant="h10" className='' sx={{display:"flex", flexDirection:"row", justifyContent:"center"}} style={{color: "#4f0128"}}>
                   or
               </Typography>
@@ -97,7 +113,7 @@ export default function Inputs() {
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
                 >
-                    GENERATE
+                    Generate From Hex
                 </Button>
             </Link>
             </Box>
