@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { color } from '@mui/system';
 import { Link } from 'react-scroll'
-import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend';
+import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
