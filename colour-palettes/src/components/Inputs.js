@@ -41,6 +41,63 @@ export default function Inputs({ onChangePalette }) {
       password: data.get('password'),
     });
   };
+  const handlePhraseSubmit = async () => {
+    const phrase = document.getElementById('phrase').value;
+    if (phrase) {
+      try {
+        const response = await fetch('http://localhost:3001/text-palette', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ string: phrase })
+        });
+        if (response.ok) {
+          const newPalette = await response.json();
+          onChangePalette(newPalette);
+        } else {
+          console.error('Server responded with an error');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  };
+
+  const randomPalette = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/random-palette');
+      if (response.ok) {
+        const newPalette = await response.json();
+        onChangePalette(newPalette);
+      } else {
+        console.error('Server responded with an error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleHexSubmit = () => {
+    const hexVal = document.getElementById('hexVal').value;
+    if (hexVal) {
+      const rgbArray = hexToRgb(hexVal);
+      hexPalette([rgbArray]); // Assuming hexPalette expects an array
+    }
+  };
+  
+  function hexPalette(RGB_array) {
+    fetch('http://localhost:3001/hex-palette', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ RGB_array }), // Send RGB_array in the request body
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+  }
 
   return (
     <section id="inputs">
