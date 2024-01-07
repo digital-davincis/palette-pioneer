@@ -14,9 +14,12 @@ import { color } from '@mui/system';
 import ColorPicker from 'material-ui-color-picker'
 import { useState } from 'react';
 import { Link } from 'react-scroll'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 //import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
 // TODO remove, this demo shouldn't need to reset the theme.
+
 
 const defaultTheme = createTheme();
 
@@ -36,6 +39,16 @@ export default function Inputs() {
       email: data.get('email'),
       password: data.get('password'),
     });
+  };
+
+  const [open, setOpen] = React.useState(false);
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -80,7 +93,10 @@ export default function Inputs() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
-                    onClick={handlePhraseSubmit}
+                    onClick={() => {
+                      handlePhraseSubmit();
+                      handleOpen();
+                    }}
                 >
                     Generate From Phrase
                 </Button>
@@ -130,7 +146,10 @@ export default function Inputs() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
-                    onClick={handleHexSubmit}
+                    onClick={() => {
+                      handleHexSubmit();
+                      handleOpen();
+                    }}
                 >
                     Generate From Hex
                 </Button>
@@ -182,10 +201,22 @@ export default function Inputs() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style = {{backgroundColor: "#781e67", padding:'20px'}}
-                onClick={randomPalette}
+                onClick={() => {
+                  randomPalette();
+                  handleOpen();
+                }}
               >
                 GENERATE RANDOM PALETTE
               </Button>
+              <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
             </Link>
             </Box>
           </Box>
