@@ -26,7 +26,7 @@ app.post('/hex-palette', async (req, res) => {
     try {
       const input = req.body.RGB_array; // Ensure the client sends RGB_array
       const palette = await getPaletteFromColor(input);
-      console.log(palette);
+      console.log("Server.js:", palette);
       res.json(palette);
     } catch (error) {
       console.error(error);

@@ -14,24 +14,14 @@ import { color } from '@mui/system';
 import ColorPicker from 'material-ui-color-picker'
 import { useState } from 'react';
 import { Link } from 'react-scroll'
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import Palette from './Palette';
 //import { getPaletteFromText, getPaletteFromColor, getRandomPalette } from '../backend.js';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-
 const defaultTheme = createTheme();
 
 export default function Inputs({ onChangePalette }) {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const [color, setColor] = useState('#000000');
 
@@ -48,8 +38,10 @@ export default function Inputs({ onChangePalette }) {
       password: data.get('password'),
     });
   };
+
   const handlePhraseSubmit = async () => {
     const phrase = document.getElementById('phrase').value;
+    console.log(phrase);
     if (phrase) {
       try {
         const response = await fetch('http://localhost:3001/text-palette', {
@@ -61,7 +53,7 @@ export default function Inputs({ onChangePalette }) {
         });
         if (response.ok) {
           const newPalette = await response.json();
-          handleClose();
+          console.log(newPalette);
           onChangePalette(newPalette);
         } else {
           console.error('Server responded with an error');
@@ -77,7 +69,6 @@ export default function Inputs({ onChangePalette }) {
       const response = await fetch('http://localhost:3001/random-palette');
       if (response.ok) {
         const newPalette = await response.json();
-        handleClose();
         onChangePalette(newPalette);
       } else {
         console.error('Server responded with an error');
@@ -87,48 +78,38 @@ export default function Inputs({ onChangePalette }) {
     }
   };
 
+
   const handleHexSubmit = async () => {
     const hexVal = document.getElementById('hexVal').value;
     if (hexVal) {
-      try {
-        const rgbArray = hexToRgb(hexVal);
-        const response = await fetch('http://localhost:3001/hex-palette', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ rgbArray })
-        });
-        if (response.ok) {
-          const newPalette = await response.json();
-          handleClose();
-          onChangePalette(newPalette);
-        } else {
-          console.error('Server responded with an error');
-        }
-      } catch (error) {
-        console.error('Error:', error);
+      const rgbArray = hexToRgb(hexVal);
+      console.log(rgbArray)
+      await hexPalette(rgbArray);
+    }
+  };
+  
+
+  async function hexPalette(RGB_array) {
+    try {
+      const response = await fetch('http://localhost:3001/hex-palette', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(RGB_array), // Send RGB_array in the request body
+      });
+      if (response.ok) {
+        const newPalette = await response.json();
+        console.log(newPalette);
+        onChangePalette(newPalette);
+      } else {
+        console.error('Server responded with an error');
       }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
-};
-
-
-  // const handleHexSubmit = () => {
-  //   const hexVal = document.getElementById('hexVal').value;
-  //   if (hexVal) {
-  //     const rgbArray = hexToRgb(hexVal);
-  //     hexPalette([rgbArray]); // Assuming hexPalette expects an array
-  //   }
-  // };
-
-  //const handleHexSubmit = () => {
-  //  const hexVal = document.getElementById('hexVal').value;
-  //  if (hexVal) {
-  //    const rgbArray = hexToRgb(hexVal);
-  //    handleClose();
-  //    hexPalette([rgbArray]); // Assuming hexPalette expects an array
-  //  }
-  //};
+  
 
 
   return (
@@ -173,10 +154,7 @@ export default function Inputs({ onChangePalette }) {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
-                    onClick={() => {
-                      handlePhraseSubmit();
-                      handleOpen();
-                    }}
+                    onClick={handlePhraseSubmit}
                 >
                     Generate From Phrase
                 </Button>
@@ -226,10 +204,7 @@ export default function Inputs({ onChangePalette }) {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     style = {{backgroundColor: "#781e67"}}
-                    onClick={() => {
-                      handleHexSubmit();
-                      handleOpen();
-                    }}
+                    onClick={handleHexSubmit}
                 >
                     Generate From Hex
                 </Button>
@@ -281,19 +256,10 @@ export default function Inputs({ onChangePalette }) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style = {{backgroundColor: "#781e67", padding:'20px'}}
-                onClick={() => {
-                  randomPalette();
-                  handleOpen();
-                }}
+                onClick={randomPalette}
               >
                 GENERATE RANDOM PALETTE
               </Button>
-              <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
             </Link>
             </Box>
           </Box>
@@ -303,70 +269,6 @@ export default function Inputs({ onChangePalette }) {
     </section>
   );
 };
-
-function hexPalette(RGB_array) {
-  fetch('http://localhost:3001/hex-palette', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ RGB_array }), // Send RGB_array in the request body
-  })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-}
-
-// Reference comments in backend.js for input and output formats.
-
-// function randomPalette() {
-//   fetch('http://localhost:3001/random-palette')
-//     .then(response => {
-//       console.log(response); // Log the raw response
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok');
-//       }
-//       return response.json();
-//     })
-//     .then(data => console.log(data))
-//     .catch(error => console.error('Error:', error));
-// }
-
-
-
-// function textPalette(string) {
-//   console.log(string);
-//   fetch('http://localhost:3001/text-palette', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ string })
-//   })
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-//     return response.text();
-//   })
-//   .then(text => {
-//     console.log("Server response:", text); // Log the text response
-//     return JSON.parse(text);
-//   })
-//   .then(data => {
-//     console.log(data);
-//   })
-//   .catch(error => console.error('Error:', error));
-// }
-
-
-// const handlePhraseSubmit = () => {
-//   const phrase = document.getElementById('phrase').value;
-//   if (phrase) {
-//     textPalette(phrase);
-//   }
-// };
-
 
 
 // Helper function to convert hex to RGB
