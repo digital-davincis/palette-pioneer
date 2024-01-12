@@ -3,6 +3,11 @@
 
 ![Palette_Pioneer](https://github.com/sankalpsaini/hacked2024/assets/49659278/3f691644-89f0-4548-9eb9-10e1b749a1b7)
 
+# Demo Video #
+
+[![Palette Pioneer](https://img.youtube.com/vi/VsM11Efy_AM/0.jpg)](https://www.youtube.com/watch?v=VsM11Efy_AM)
+
+
 # Inspiration and what it does
 We have all been in a position where we have had to come up with a color palette for a school project, work, or even a hackathon! Our team wanted to make it easier for developers to generate either a completely random palette, base it off an existing hex color, or even generate one based on text input (ex. "Color Palette based on a sunset")! Based on the generated palette, Palette Pioneer allows the user to "hold" or "lock" specific colors that they like and re-generate the palette based on those new inputs.
 
