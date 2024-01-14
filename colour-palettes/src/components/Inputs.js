@@ -44,7 +44,7 @@ export default function Inputs({ onChangePalette }) {
     console.log(phrase);
     if (phrase) {
       try {
-        const response = await fetch('http://localhost:3001/text-palette', {
+        const response = await fetch('https://palette-pioneer-backend.onrender.com/text-palette', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export default function Inputs({ onChangePalette }) {
 
   const randomPalette = async () => {
     try {
-      const response = await fetch('http://localhost:3001/random-palette');
+      const response = await fetch('https://palette-pioneer-backend.onrender.com/random-palette');
       if (response.ok) {
         const newPalette = await response.json();
         onChangePalette(newPalette);
@@ -91,7 +91,7 @@ export default function Inputs({ onChangePalette }) {
 
   async function hexPalette(RGB_array) {
     try {
-      const response = await fetch('http://localhost:3001/hex-palette', {
+      const response = await fetch('https://palette-pioneer-backend.onrender.com/hex-palette', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
