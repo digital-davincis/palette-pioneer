@@ -4,7 +4,7 @@ const { getRandomPalette, getPaletteFromColor, getPaletteFromText } = require('.
 
 const app = express();
 app.use(express.json())
-const port = 3001; // Can be any port that's free on your system
+const port = process.env.PORT || 3001; // Can be any port that's free on your system
 
 app.use(cors()); // Use CORS to allow cross-origin requests
 
@@ -19,7 +19,7 @@ app.get('/random-palette', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
 
 app.post('/hex-palette', async (req, res) => {
