@@ -1,7 +1,28 @@
-# Palette Pioneer
-## Created for [HackED 2024](https://devpost.com/software/palette-pioneer)
+<div align="center">
+  <img alt="Palette Pioneer" src="https://github.com/sankalpsaini/hacked2024/assets/49659278/3f691644-89f0-4548-9eb9-10e1b749a1b7">
+</div>
 
-![Palette_Pioneer](https://github.com/sankalpsaini/hacked2024/assets/49659278/3f691644-89f0-4548-9eb9-10e1b749a1b7)
+<h1 align="center"><a href="https://palette-pioneer.netlify.app">Palette Pioneer</a></h1>
+
+<h3 align="center"> Created for HackED 2024 </h3>
+
+<div align="center">
+  <a href="https://palette-pioneer.netlify.app">
+    <img alt="Check out our website" src="https://img.shields.io/badge/website-palette--pioneer.netlify.app-limegreen?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGQ9Ik00NDAtMjgwSDI4MHEtODMgMC0xNDEuNS01OC41VDgwLTQ4MHEwLTgzIDU4LjUtMTQxLjVUMjgwLTY4MGgxNjB2ODBIMjgwcS01MCAwLTg1IDM1dC0zNSA4NXEwIDUwIDM1IDg1dDg1IDM1aDE2MHY4MFpNMzIwLTQ0MHYtODBoMzIwdjgwSDMyMFptMjAwIDE2MHYtODBoMTYwcTUwIDAgODUtMzV0MzUtODVxMC01MC0zNS04NXQtODUtMzVINTIwdi04MGgxNjBxODMgMCAxNDEuNSA1OC41VDg4MC00ODBxMCA4My01OC41IDE0MS41VDY4MC0yODBINTIwWiIgZmlsbD0iI2ZmZmZmZiIvPjwvc3ZnPg%3D%3D">
+  </a>
+  
+  <a href="https://devpost.com/software/palette-pioneer">
+    <img alt="Devpost" src="https://img.shields.io/badge/devpost-blue?logo=devpost&link=https%3A%2F%2Fdevpost.com%2Fsoftware%2Fpalette-pioneer">
+  </a>
+
+  <a href="https://app.netlify.com/sites/palette-pioneer/deploys">
+    <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/2d933016-8891-447c-8cff-86ed61842236/deploy-status">
+  </a>
+
+  <a href="https://hacked.compeclub.com/">
+    <img alt="HackED Hackathon" src="https://img.shields.io/badge/HackED-2024-44bdb4">
+  </a>
+</div>
 
 # Demo Video #
 
